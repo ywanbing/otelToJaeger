@@ -1,0 +1,35 @@
+# 日志级别
+log-level: info
+
+# 管理服务相关配置 including health check, /metrics, etc.
+admin:
+    http:
+        host-port: :14269 # 监听地址
+
+collector:
+    # the collector's gRPC server
+    grpc-server:
+        host-port: :14250 # 监听地址
+        max-connection-age: 0s
+    http-server:
+        host-port: :14268 # 监听地址
+        idle-timeout: 0s
+    otlp:
+        enabled: false
+        grpc:
+            host-port: :14270
+        http:
+            host-port: :14271
+
+# Es 相关配置
+es:
+    # es 索引前缀，example：production  -> production-jaeger-*
+    index-prefix: production # 索引前缀
+    num-shards: 1
+    username: ""
+    password: ""
+    server-urls: http://elasticsearch:9200,http://elasticsearch2:9200
+    # 通过这2个参数进行自动创建索引
+    use-aliases: false
+    use-ilm: false
+
